@@ -88,8 +88,9 @@ College-attendance-R/
    source("scripts/analysis.R")
    ```
 This will:
--Clean and prepare the dataset  
--Create indicators (college attendance, log income, household role, etc.)  
+
+- Clean and prepare the dataset  
+- Create indicators (college attendance, log income, household role, etc.)  
 - Estimate OLS and logistic regression models  
 - Produce and save plots under output/figures/
 
