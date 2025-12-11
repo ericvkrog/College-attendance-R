@@ -94,7 +94,7 @@ This will:
 - Produce and save plots under output/figures/
 
   ## Results
-  -	Income is strongly positively associated with college attendance, each one-unit increase in log(income + 1) is associated with a sizable increase in the odds of attending college.
+  	-	Income is strongly positively associated with college attendance, each one-unit increase in log(income + 1) is associated with a sizable increase in the odds of attending college.
 	-	Race effects change substantially between unadjusted and adjusted models:
 	-	In the unadjusted model, Black individuals appear less likely to attend college than White individuals.
 	-	After controlling for income, gender, marital status, and household role, Black individuals show higher odds of attending college relative to White individuals, suggesting that raw racial gaps partly reflect underlying socioeconomic differences.
