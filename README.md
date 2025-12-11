@@ -5,7 +5,7 @@ This repository contains an empirical analysis of which adults in the United Sta
 The project examines how income, race, gender, marital status, and household role relate to:
 
 - Years of education (continuous outcome; OLS regression), and  
-- College attendance*(binary outcome; logistic regression).
+- College attendance (binary outcome; logistic regression).
 
 All analysis is implemented in R.
 
@@ -57,7 +57,6 @@ Key modeling choices:
   White, male, unmarried, not head of household, and income = 0 (after transformation).
 
 ---
-
 ## Repository Structure
 
 ```text
@@ -73,3 +72,34 @@ College-attendance-R/
 │   └── paper.docx           # Editable version of the report
 └── output/
     └── figures/             # Saved plots (e.g., attendance by race, odds ratios)
+```
+
+## Reproducing the Analysis
+
+1. Install R and required packages:
+   ```r
+   install.packages(c("dplyr", "ggplot2", "stargazer", "readr"))
+   ```
+2. Download CPS ASEC 2024 microdata.
+   Save it as `data/cps_asec_2024.csv`.
+
+3. Run the main script:
+   ```r
+   source("scripts/analysis.R")
+   ```
+This will:
+-Clean and prepare the dataset  
+-Create indicators (college attendance, log income, household role, etc.)  
+- Estimate OLS and logistic regression models  
+- Produce and save plots under output/figures/
+
+  ## Results
+  -	Income is strongly positively associated with college attendance, each one-unit increase in log(income + 1) is associated with a sizable increase in the odds of attending college.
+	-	Race effects change substantially between unadjusted and adjusted models:
+	-	In the unadjusted model, Black individuals appear less likely to attend college than White individuals.
+	-	After controlling for income, gender, marital status, and household role, Black individuals show higher odds of attending college relative to White individuals, suggesting that raw racial gaps partly reflect underlying socioeconomic differences.
+	-	Women have higher odds of attending college than men.
+	-	Married individuals are more likely to have attended college than unmarried individuals.
+	-	Heads of household are less likely to have attended college, consistent with higher non-school responsibilities.
+
+These findings support the idea that educational attainment is shaped by more than just individual “effort” or ability; structural and socioeconomic factors play a major role.
