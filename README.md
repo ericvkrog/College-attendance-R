@@ -1,6 +1,8 @@
-# Who Goes to College? Educational Attainment Analysis in R
+# Determinants of College Attendance in the U.S. (R, CPS ASEC)
 
 This repository contains an empirical analysis of which adults in the United States attend college, using microdata from the 2024 Current Population Survey Annual Social and Economic Supplement (CPS ASEC).
+
+The written paper in /report provides extended interpretation and context; the core analysis and results are fully reproducible via the R scripts.
 
 The project examines how income, race, gender, marital status, and household role relate to:
 
@@ -21,7 +23,8 @@ The sample is restricted to adults aged 25 and older so that educational attainm
 
 ## Data
 
-- Source: 2024 CPS ASEC microdata collected by the U.S. Census Bureau and Bureau of Labor Statistics.  
+- Source: 2024 CPS ASEC microdata collected by the U.S. Census Bureau and Bureau of Labor Statistics.
+- Sample size: ~95,000 adults aged 25+
 - Unit of observation: Individual adult (25+).  
 - Key variables:
   - Years of education (continuous)
@@ -38,6 +41,8 @@ To reproduce the analysis, you’ll need to download CPS ASEC 2024 and place it 
 ---
 
 ## Methods
+
+The analysis follows a standard data workflow: data ingestion, cleaning and feature engineering, model estimation, and visualization of results.
 
 Two main model families are used:
 
@@ -95,12 +100,18 @@ This will:
 - Produce and save plots under output/figures/
 
   ## Results
-  	-	Income is strongly positively associated with college attendance, each one-unit increase in log(income + 1) is associated with a sizable increase in the odds of attending college.
-	-	Race effects change substantially between unadjusted and adjusted models:
+  
+  	-	**Income** is strongly positively associated with college attendance, each one-unit increase in log(income + 1) is associated with a sizable increase in the odds of attending college.
+	-	**Race** effects change substantially between unadjusted and adjusted models:
 	-	In the unadjusted model, Black individuals appear less likely to attend college than White individuals.
 	-	After controlling for income, gender, marital status, and household role, Black individuals show higher odds of attending college relative to White individuals, suggesting that raw racial gaps partly reflect underlying socioeconomic differences.
-	-	Women have higher odds of attending college than men.
-	-	Married individuals are more likely to have attended college than unmarried individuals.
-	-	Heads of household are less likely to have attended college, consistent with higher non-school responsibilities.
+	-	**Women** have higher odds of attending college than men.
+	-	**Married** individuals are more likely to have attended college than unmarried individuals.
+	-	**Heads of household** are less likely to have attended college, consistent with higher non-school responsibilities.
 
 These findings support the idea that educational attainment is shaped by more than just individual “effort” or ability; structural and socioeconomic factors play a major role.
+
+## Limitations & Next Steps
+- The CPS ASEC data are self-reported and cross-sectional, limiting causal interpretation.
+- The analysis does not include academic performance measures (e.g., GPA) or field of study.
+- Future extensions could examine cohort effects, graduation outcomes, or link educational attainment to labor-market outcomes.
