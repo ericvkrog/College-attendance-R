@@ -83,10 +83,13 @@ College-attendance-R/
 
 1. Install R and required packages:
    ```r
-   install.packages(c("dplyr", "ggplot2", "stargazer", "readr"))
+   install.packages(c("readr","dplyr","ggplot2","psych","forcats","stargazer","broom","here"))
    ```
-2. Download CPS ASEC 2024 microdata.
-   Save it as `data/cps_asec_2024.csv`.
+2.	Download the CPS ASEC 2024 person-level microdata (folder typically named asecpub24csv) and place it so this file exists:
+`
+data/asecpub24csv/pppub24.csv
+`
+	Raw CPS data is not included in this repository.
 
 3. Run the main script:
    ```r
