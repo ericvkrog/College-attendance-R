@@ -10,7 +10,7 @@ library(forcats)
 library(stargazer)
 
 # ---------------------- FILE PATH SETUP ----------------------
-base_path <- "/Users/erickrog/Downloads/"
+base_path <- "/Users/User/Downloads/"
 data_file <- file.path(base_path, "asecpub24csv/pppub24.csv")
 
 # ---------------------- LOAD DATA ----------------------------
