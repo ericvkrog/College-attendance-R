@@ -10,8 +10,11 @@ library(forcats)
 library(stargazer)
 
 # ---------------------- FILE PATH SETUP ----------------------
-base_path <- "/Users/User/Downloads/"
-data_file <- file.path(base_path, "asecpub24csv/pppub24.csv")
+library(here)
+data_file <- here("data", "pppub24.csv")
+if (!file.exists(data_file)) {
+  stop("Missing data/pppub24.csv. Download CPS ASEC 2024 and save it there.")
+}
 
 # ---------------------- LOAD DATA ----------------------------
 data <- read_csv(data_file)
