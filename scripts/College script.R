@@ -93,57 +93,58 @@ stargazer(model_logit_unadj, model_logit_adj,
           no.space = TRUE)
 
 # ---------------------- PLOTS: KEY VISUALS ----------------------
+dir.create("figures", showWarnings = FALSE)
 
-# College attendance by race (clean, better labeled)
-ggplot(data, aes(x = race, fill = factor(college_attend, labels = c("No", "Yes")))) +
+p_race <- ggplot(data, aes(x = race, fill = factor(college_attend, labels = c("No", "Yes")))) +
   geom_bar(position = "fill", color = "white") +
   scale_y_continuous(labels = scales::percent_format()) +
   labs(title = "College Attendance by Race",
-       x = "Race",
-       y = "Percentage",
-       fill = "Attended College") +
+       x = "Race", y = "Percentage", fill = "Attended College") +
   theme_minimal()
 
-# College attendance by sex
-ggplot(data, aes(x = sex, fill = factor(college_attend, labels = c("No", "Yes")))) +
+ggsave("figures/college_attendance_by_race.png", p_race, width = 8, height = 5, dpi = 200, bg="white")
+
+
+p_sex <- ggplot(data, aes(x = sex, fill = factor(college_attend, labels = c("No", "Yes")))) +
   geom_bar(position = "fill", color = "white") +
   scale_y_continuous(labels = scales::percent_format()) +
   labs(title = "College Attendance by Gender",
-       x = "Sex",
-       y = "Percentage",
-       fill = "Attended College") +
+       x = "Sex", y = "Percentage", fill = "Attended College") +
   theme_minimal()
 
-# College attendance by marital status
-ggplot(data, aes(x = factor(married, labels = c("No", "Yes")),
-                 fill = factor(college_attend, labels = c("No", "Yes")))) +
+ggsave("figures/college_attendance_by_gender.png", p_sex, width = 8, height = 5, dpi = 200, bg="white")
+
+
+p_married <- ggplot(data, aes(x = factor(married, labels = c("No", "Yes")),
+                              fill = factor(college_attend, labels = c("No", "Yes")))) +
   geom_bar(position = "fill", color = "white") +
   scale_y_continuous(labels = scales::percent_format()) +
   labs(title = "College Attendance by Marital Status",
-       x = "Married",
-       y = "Percentage",
-       fill = "Attended College") +
+       x = "Married", y = "Percentage", fill = "Attended College") +
   theme_minimal()
 
-# College attendance by head of household
-ggplot(data, aes(x = factor(head_of_household, labels = c("No", "Yes")),
-                 fill = factor(college_attend, labels = c("No", "Yes")))) +
+ggsave("figures/college_attendance_by_marital_status.png", p_married, width = 8, height = 5, dpi = 200, bg="white")
+
+
+p_hh <- ggplot(data, aes(x = factor(head_of_household, labels = c("No", "Yes")),
+                         fill = factor(college_attend, labels = c("No", "Yes")))) +
   geom_bar(position = "fill", color = "white") +
   scale_y_continuous(labels = scales::percent_format()) +
   labs(title = "College Attendance by Household Role",
-       x = "Head of Household",
-       y = "Percentage",
-       fill = "Attended College") +
+       x = "Head of Household", y = "Percentage", fill = "Attended College") +
   theme_minimal()
 
-# Education years vs log income with smoothing
-ggplot(data, aes(x = log(inctot + 1), y = educ_years)) +
+ggsave("figures/college_attendance_by_household_role.png", p_hh, width = 8, height = 5, dpi = 200, bg="white")
+
+
+p_income <- ggplot(data, aes(x = log(inctot + 1), y = educ_years)) +
   geom_jitter(alpha = 0.2, size = 0.5) +
   geom_smooth(method = "lm", se = FALSE, color = "steelblue", linewidth = 1) +
   labs(title = "Education Years vs. Log Income",
-       x = "Log(Income + 1)",
-       y = "Years of Education") +
+       x = "Log(Income + 1)", y = "Years of Education") +
   theme_minimal()
+
+ggsave("figures/educ_years_vs_log_income.png", p_income, width = 8, height = 5, dpi = 200, bg="white")
 # ---------------------- ODDS RATIO PLOT -----------------------
 
 library(broom)  # for tidying model output
@@ -169,16 +170,15 @@ tidy_model$term <- recode(tidy_model$term,
 )
 
 # Plot odds ratios
-ggplot(tidy_model, aes(x = reorder(term, estimate), y = estimate)) +
+p_or <- ggplot(tidy_model, aes(x = reorder(term, estimate), y = estimate)) +
   geom_point(size = 3, color = "steelblue") +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2) +
   geom_hline(yintercept = 1, linetype = "dashed", color = "gray40") +
   coord_flip() +
-  labs(
-    title = "Figure 1. Odds Ratios from Adjusted Logistic Model",
-    x = "Variable",
-    y = "Odds Ratio (exp(β))"
-  ) +
+  labs(title = "Figure 1. Odds Ratios from Adjusted Logistic Model",
+       x = "Variable", y = "Odds Ratio (exp(β))") +
   theme_minimal()
+
+ggsave("figures/odds_ratios_adjusted_logit.png", p_or, width = 8, height = 5, dpi = 200, bg="white")
 
 
